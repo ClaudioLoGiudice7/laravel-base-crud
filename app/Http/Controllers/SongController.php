@@ -18,7 +18,7 @@ class SongsController extends Controller
 
         return view("songs.index", compact("songs"));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

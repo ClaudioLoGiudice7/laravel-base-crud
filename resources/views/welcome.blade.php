@@ -38,9 +38,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Welcome</h1>
-    <p>This is the welcome page.</p>
-    <a href="{{ route('songs.index') }}">View Songs</a>
+    <div class="container my-5">
+        <a href="{{ route('songs.index') }}">Visualizza la lista delle canzoni</a>
+    </div>
 @endsection
 
 </html>

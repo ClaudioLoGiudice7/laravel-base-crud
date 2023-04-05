@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-<div class="container my-5">
-    <h1>Songs</h1>
-    <p>This is the songs page.</p>
+<div class="container my-4">
+    <h1 class="my-4">Lista delle canzoni</h1>
 
     <table class="table table-dark table-striped">
         <thead>

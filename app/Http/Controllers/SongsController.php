@@ -13,11 +13,10 @@ class SongsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $songs = Song::all();
-
-        return view("songs.index", compact("songs"));
-    }
+{
+    $songs = Song::all();
+    return view('songs.index', compact('songs'));
+}
     
     /**
      * Show the form for creating a new resource.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SongsController extends Controller
 {
@@ -53,6 +54,8 @@ class SongsController extends Controller
 
          // Reindirizzamento alla pagina di dettaglio della canzone appena salvata
         return redirect()->route('songs.show', ['id' => $song->id]);
+
+        $data = $this->validation($request->all());
     }
 
     /**
@@ -89,6 +92,8 @@ class SongsController extends Controller
         $data = $request->all();
         $song->update($data);
         return redirect()->route('songs.show', $song);
+    
+        $data = $this->validation($request->all(), $song->id);
     }
 
     /**
@@ -101,5 +106,50 @@ class SongsController extends Controller
     {
         $song->delete();
         return redirect()->route('songs.index');
+    }
+
+    // App/Http/Controllers/PastaController.php
+
+    private function validation($data) {
+    $validator = Validator::make(
+        $data,
+        [
+            'title' => 'required|string|max:20',
+            'album' => "required|string|max:30",
+            "author" => "required|string|max:5",
+            "editor" => "string",
+            "length" => "required|integer",
+            "poster" => "nullable|string",
+            "release_date" => "nullable|string",
+            "cover" => "required"
+        ],
+        [
+            'name.required' => 'Il titolo è obbligatorio',
+            'name.string' => 'Il titolo deve essere una stringa',
+            'name.max' => 'Il titolo deve essere massimo di 20 caratteri',
+
+            'album.required' => 'L\'album è obbligatorio',
+            'album.string' => 'L\album deve essere una stringa',
+            'album.max' => 'L\'album deve essere massimo di 30 caratteri',
+
+            'author.required' => 'L\'autore è obbligatorio',
+            'author.string' => 'L\autore deve essere una stringa',
+            'author.max' => 'L\'autore deve essere massimo di 5 caratteri',
+            
+            'editor.string' => 'L\'etichetta deve essere una stringa',
+            
+            'length.required' => 'La lunghezza è obbligatoria',
+            'length.integer' => 'La lunghezza deve essere un numero',
+            
+            'poster.string' => 'L\'immagine deve essere una stringa',
+            
+            'release_date.string' => 'La data d\'uscita deve essere una stringa',
+
+            'cover.required' => 'La cover deve essere obbligatoria'
+        ]
+        
+    )->validate();
+
+        return $validator;
     }
 }

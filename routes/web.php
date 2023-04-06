@@ -19,7 +19,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('songs', 'App\Http\Controllers\SongsController');
+
 Route::get('/songs', [SongsController::class, 'index'])->name('songs.index');
+
+Route::get('/songs/{id}', [SongController::class, 'show'])->name('songs.show');
+
+Route::get('/songs/create', 'App\Http\Controllers\SongsController@create')->name('songs.create');
+
+Route::get('/songs/{id}/edit', 'SongsController@edit');
+
+Route::get('/songs/update', 'SongsController@update')->name('songs.update');
+
+Route::delete('/songs/{id}', 'SongsController@destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

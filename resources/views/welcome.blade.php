@@ -13,7 +13,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- TITLE -->
-    <title>Document</title>
+    <title>Home</title>
 
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -39,7 +39,7 @@
 
 @section('content')
     <div class="container my-5">
-        <a href="{{ route('songs.index') }}">Visualizza la lista delle canzoni</a>
+        <a href="{{ route('songs.index') }}">View song list</a>
     </div>
 @endsection
 

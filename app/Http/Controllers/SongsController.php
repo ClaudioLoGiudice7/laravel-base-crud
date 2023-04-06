@@ -13,10 +13,10 @@ class SongsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-{
-    $songs = Song::all();
-    return view('songs.index', compact('songs'));
-}
+    {
+        $songs = Song::all();
+        return view('songs.index', compact('songs'));
+    }
     
     /**
      * Show the form for creating a new resource.
@@ -51,7 +51,8 @@ class SongsController extends Controller
 
         $song->save();
 
-        return redirect()->route('songs.index')->with('success', 'Canzone creata con successo!');
+         // Reindirizzamento alla pagina di dettaglio della canzone appena salvata
+        return redirect()->route('songs.show', ['id' => $song->id]);
     }
 
     /**
@@ -73,7 +74,7 @@ class SongsController extends Controller
      */
     public function edit(Song $song)
     {
-        //
+        return view("songs.edit", compact ("song"));
     }
 
     /**
@@ -85,7 +86,9 @@ class SongsController extends Controller
      */
     public function update(Request $request, Song $song)
     {
-        //
+        $data = $request->all();
+        $song->update($data);
+        return redirect()->route('songs.show', $song);
     }
 
     /**
@@ -96,6 +99,7 @@ class SongsController extends Controller
      */
     public function destroy(Song $song)
     {
-        //
+        $song->delete();
+        return redirect()->route('songs.index');
     }
 }
